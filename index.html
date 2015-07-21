@@ -1,0 +1,177 @@
+<!DOCTYPE html><html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        /* base */
+        * {
+          margin: 0;
+          padding: 0;
+        }
+        .clear {
+            clear: both;
+        }
+        img {
+            border: none;
+        }
+        body {
+            font-family: Calibri;
+        }
+
+        /* base elements */
+        .select-div {
+            width: 224px;
+            height: 33px;
+            margin: 0px;
+            padding: 0px;
+            cursor: pointer;
+            background-color: #DEDEDE;
+            display: inline-block;
+
+        }
+        .select-div-text {
+            font-family: Calibri;
+            font-size: 12pt;
+            color: #000;
+            height: inherit;
+            padding: 7px 0 0 10px;
+        }
+
+
+        /* jSelectPanel */
+
+        .jselectpanel {
+            display: none;
+            z-index: 2;
+            position: absolute;
+            margin: 0px;
+            padding: 8px;
+            width: 208px;
+            height: 200px;
+            background-color: #DEDEDE;
+            border-top: 1px solid gray;
+            /*
+            border: 1px solid gray;
+
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            */
+            overflow: auto;
+            overflow-x: hidden;
+        }
+        .jselectpanel-clear {
+            clear: both;
+        }
+        .jselectpanel-item {
+            float: left;
+            margin: 0 10px 5px 0;
+            padding: 3px;
+            width: 50px;
+            height: 20px;
+            border: 1px solid #D3D3D3;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+
+            color: #000000;
+            /* text-shadow: #D5D6D6 0px 1px 0px; */
+            font-size: 14px;
+            font-family: Calibri;
+        }
+        .jselectpanel-item:hover {
+            background-color: #BCBDBD; /*#F8D717;*/
+        }
+        .jselectpanel .selected {
+            background-color: #BCBDBD;
+        }
+        .jselectpanel-filter-holder {
+            text-align: center;
+            margin: 0 0 5px 0;
+        }
+        .jselectpanel-filter {
+            margin: 0px;
+            padding: 0px 4px 0 4px;
+            height: 20px;
+            width: 96%;
+            border: 1px solid #edcd17; /*#D3D3D3;*/
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        .jselectpanel-text {
+            color: #000000;
+            text-shadow: #D5D6D6 0px 1px 0px;
+            font-size: 14px;
+            font-family: Calibri;
+            text-align: center;
+        }
+
+        /* custom  */
+        .time-panel {
+            padding: 12px 0 8px 15px;
+            min-height: 100px;
+            height: auto;
+        }
+        .time-item:nth-child(4n) { margin-right: 0px; }
+    </style>
+    <title>JSelectPanel Example by jwagra</title>
+</head>
+<body>
+<h1>JSelectPanel - jQuery combobox with filter by jwagra</h1>
+<br /><br />
+<div id="city" class="select-div"><div class="select-div-text" id="select-div-text-city">City</div></div>
+<div id="time" class="select-div"><div class="select-div-text" id="select-div-text-time">Time</div></div>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="jSelectPanel.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#city").jselectpanel({
+            items: [
+                { title: 'Москва', value: 1 }, { title: 'Самара', value: 2 }, { title: 'Тюмень', value: 3 },
+                { title: 'Новосибирск', value: 4 }, { title: 'Новороссийск', value: 5 }, { title: 'Кострома', value: 6 },
+                { title: 'Paris', value: 7 },
+            ],
+            itemWidth: 185,
+            itemHeight: 16,
+            change: function(result) { console.log('jSelectPanel change result:', result); },
+            changeTextItemId: 'select-div-text-city',
+            changeTextDefaultValue: 'City',
+            filter: true,
+            filterBy: 'title',
+            filterEmptyText: 'Filter',
+            additionalPanelClass: 'city-panel',
+            additionalItemClass: 'city-item'
+        });
+        $("#time").jselectpanel({
+            items: [
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '10:00', value: 1 },
+                { title: '10:00', value: 1 }, { title: '10:00', value: 1 }, { title: '12:00', value: 2 }
+            ],
+            itemWidth: 32,
+            itemHeight: 16,
+            change: function(result) { },
+            changeTextItemId: 'select-div-text-time',
+            changeTextDefaultValue: 'Time',
+            additionalPanelClass: 'time-panel',
+            additionalItemClass: 'time-item'
+        });
+        // examples
+        //console.log('jSelectPanel getValue:', $('#time').jselectpanel('getValue'));
+        //$('#city').jselectpanel('setValue', 1);
+        //$('#city').jselectpanel('setValue', 'Тюмень', 'title');
+        //$('#time').jselectpanel('appendHtml', '<div class="jselectpanel-text">--- !!! ---</div>');
+        //$("#time").jselectpanel('reset');
+        //$('#org-city').jselectpanel('update', []);
+    });
+</script>
+</body>
+</html>
